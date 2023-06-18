@@ -82,7 +82,7 @@
             fetch("https://eastus.tts.speech.microsoft.com/cognitiveservices/v1", {
               method: "POST",
               headers: {
-                "Ocp-Apim-Subscription-Key": "801ca6b2bde74b5e8e7466f7647b67e4",
+                "Ocp-Apim-Subscription-Key": "",
                 "Content-Type": "application/ssml+xml",
                 "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
               },
