@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			crossorigin="anonymous">
+	</script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="other/css/style1.css">
+	<script>
+		$(function () {
+			$("#header").load("header.jsp");
+			$("#footer").load("footer.html");
+		});
+		
+	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather</title>
+    <link rel="icon" href="Pics/icon.png">
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>  
+    <div class="font">
+		<div class="container-fluid">
+			<div id="header"></div>
+			   <div class="header-adjustment"></div>
+			   <div class="container">
+        		<div class="row justify-content-center">
+          		<div class="col-sm-4">
+            	<h3>Location</h3>        
+            	<select name="selected-city" class="cities form-control" id="selected-city">
+                <option value="">Select Location</option>
+                <option value="Agra">Agra</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Bangkok">Bangkok</option>
+                <option value="Berlin">Berlin</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Busan">Busan</option>
+                <option value="Cairo">Cairo</option>
+                <option value="Cape Town">Cape Town</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Daegu">Daegu</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Dubai">Dubai</option>
+                <option value="Ho Chi Minh City">Ho Chi Minh City</option>
+                <option value="Hanoi">Hanoi</option>
+                <option value="Houston">Houston</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Incheon">Incheon</option>
+                <option value="Indore">Indore</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Johannesburg">Johannesburg</option>
+                <option value="Kanpur">Kanpur</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="London">London</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Ludhiana">Ludhiana</option>
+                <option value="Manila">Manila</option>
+                <option value="Melbourne">Melbourne</option>
+                <option value="Mexico City">Mexico City</option>
+                <option value="Miami">Miami</option>
+                <option value="Moscow">Moscow</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Nairobi">Nairobi</option>
+                <option value="New York">New York</option>
+                <option value="Paris">Paris</option>
+                <option value="Patna">Patna</option>
+                <option value="Perth">Perth</option>
+                <option value="Pune">Pune</option>
+                <option value="Rome">Rome</option>
+                <option value="Sao Paulo">Sao Paulo</option>
+                <option value="Seoul">Seoul</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Surat">Surat</option>
+                <option value="Sydney">Sydney</option>
+                <option value="Thane">Thane</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="Toronto">Toronto</option>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Vancouver">Vancouver</option>
+            	</select>
+          		</div>
+        	</div>
+    	</div>
+    	<div class="holds">
+    	<div class="container-fluid hold" style="visibility:hidden;">
+        	<div class="row justify-content-center">
+	            <div class="col-lg-6">
+	                <div id="weather-container" class="widget">
+	                    <div class="city" id="city"></div>
+	                    <div class="temp">
+	                        <img src="" alt="" height="60" id="weather-icon" class="animated-icon">
+	                        <span id="temperature"></span>
+	                    </div>
+	                    <div class="date" id="date"></div>
+	                    <img src="" alt="Image of Location" height="270px" id="location-image">
+	
+	                    <p class="weather-desc">The current weather at this location is <span class="weather-description" id="weather-description"></span>-like</p>
+	
+	                    <div class="weather-info" id="weather-info"></div>
+	                </div>
+	            </div>
+        	</div>
+    	</div>
+
+	    <div class="container-fluid hold" style="visibility:hidden;">
+	        <div class="row justify-content-center">
+	          <div class="col-lg-10">
+	            <div class="widget" style="background-color: rgba(227, 230, 237, 0.979);">
+	            <h2>Weather Report</h2>
+	            <div id="weather-report"></div>
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	    </div>
+    
+	    <script>
+	        $(document).ready(function() {
+	            $(document).on('change', '#selected-city', function() {
+	                const scity = $(this).val();
+	
+	                if (scity) {
+	                    $('.hold').css('visibility', 'visible');
+	                    $('.holds').css('visibility', 'visible');
+	                } else {
+	                    $('.hold').css('visibility', 'hidden');
+	                    $('.holds').css('visibility', 'hidden');
+	                }
+	
+	                // Use the country and city values to fetch the weather data
+	                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${scity}&appid=`;
+	
+	                // Fetch weather data from the API
+	                fetch(weatherUrl)
+	                    .then(response => response.json())
+	                    .then(data => {
+	                        // Extract relevant information from the JSON response
+	                        const weatherIcon = data.weather[0].icon;
+	                        const weatherDescription = data.weather[0].description;
+	                        const temperature = Math.round(data.main.temp - 273.15);
+	                        const feelsLike = Math.round(data.main.feels_like - 273.15);
+	                        const tempMin = Math.round(data.main.temp_min - 273.15);
+	                        const tempMax = Math.round(data.main.temp_max - 273.15);
+	                        const pressure = data.main.pressure;
+	                        const humidity = data.main.humidity;
+	                        const windSpeed = data.wind.speed;
+	                        const visibility = data.visibility;
+	                        const clouds = data.clouds.all;
+	                        const location = data.name;
+	
+	                        const currentDate = new Date();
+	                        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+	                        const formattedDate = currentDate.toLocaleDateString('en-US', options);
+	
+	                        // Update the HTML elements with weather information
+	                        $('#weather-icon').attr('src', `http://openweathermap.org/img/w/${weatherIcon}.png`);
+	                        $('#temperature').text(`${temperature}°C`);
+	                        $('#date').text(formattedDate);
+	                        $('#city').text(location);
+	                        $('#weather-description').text(weatherDescription);
+	
+	                        const weatherInfoElement = $('#weather-info');
+	                        weatherInfoElement.html(`
+	                            <div class="row">
+	                                <div class="col"><p><strong>Feels Like:</strong> ${feelsLike}°C</p></div>
+	                                <div class="col"><p><strong>Pressure:</strong> ${pressure} hPa</p></div>
+	                            </div> 
+	                            <div class="row">
+	                                <div class="col"><p><strong>Min Temperature:</strong> ${tempMin}°C</p></div>
+	                                <div class="col"><p><strong>Humidity:</strong> ${humidity}%</p></div>
+	                            </div>
+	                            <div class="row">
+	                                <div class="col"><p><strong>Max Temperature:</strong> ${tempMax}°C</p></div>
+	                                <div class="col"><p><strong>Wind Speed:</strong> ${windSpeed} m/s</p></div>
+	                            </div>
+	                            <div class="row">
+	                                <div class="col"><p><strong>Visibility:</strong> ${visibility} meters</p></div>
+	                                <div class="col"><p><strong>Cloudiness:</strong> ${clouds}%</p></div>
+	                            </div>
+	                        `);
+	
+	                        fetch('https://wttr.in/' + location)
+	                        .then(function(response) {
+	                            return response.text();
+	                        })
+	                        .then(function(data) {
+	                            // Insert the weather report into the designated container
+	                            document.getElementById('weather-report').innerHTML = data;
+	                        })
+	                        .catch(function(error) {
+	                            console.log('Error fetching weather data:', error);
+	                        });
+	
+	                        const apiKey = '';
+	
+	                        // Make a request to the Pexels API for location image
+	                        fetch(`https://api.pexels.com/v1/search?query=${location}&per_page=1`, {
+	                            headers: {
+	                                Authorization: apiKey
+	                            }
+	                        })
+	                            .then(response => response.json())
+	                            .then(data => {
+	                                // Extract the image URL from the API response
+	                                const imageUrl = data.photos[0].src.medium;
+	
+	                                // Update the image source in your HTML
+	                                $('#location-image').attr('src', imageUrl);
+	                            })
+	                            .catch(error => {
+	                                console.log('Error fetching image from Pexels:', error);
+	                            });
+	
+	                        // Make a request to the Pexels API for weather description image
+	                        fetch(`https://api.pexels.com/v1/search?query=${weatherDescription}%20skyline&per_page=1`, {
+	                            headers: {
+	                                Authorization: apiKey
+	                            }
+	                        })
+	                            .then(response => response.json())
+	                            .then(data => {
+	                                // Extract the image URL from the API response
+	                                const imageUrl = data.photos[0].src.medium;
+	
+	                                // Update the background image in your HTML
+	                                $('.holds').css('background-image', `url(${imageUrl})`);
+	                            })
+	                            .catch(error => {
+	                                console.log('Error fetching image from Pexels:', error);
+	                            });
+	                    })
+	                    .catch(error => {
+	                        console.log('Error fetching weather data:', error);
+	                    });
+	            });
+	        });
+	    </script>
+		</div>
+	</div>
+    <div id="footer"></div>
+</body>
+</html>

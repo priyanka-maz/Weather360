@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="other/css/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        $(function () {
+            $("#header").load("header.jsp");
+            $("#footer").load("footer.html");
+        });
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload Article</title>
+    <link rel="icon" href="Pics/icon.png">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>  
+    <div class="font">
+        <div class="container-fluid">
+            <div id="header"></div>
+            <div class="header-adjustment"></div>
+            <div class="row justify-content-center">
+			<div class="col-md-7">
+            	<h1 class="text-center" style="font-size:40px; margin:30px;">Upload An Article</h1>
+	            <form action="Upload" name="form1" class="needs-validation" novalidate method="post" enctype="multipart/form-data">
+
+	                <label for="photo">Choose an image for the article </label>
+	                <input type="file" id="photo" name="photo" accept=".jpeg, .jpg, .png">
+	                
+
+	                <div class="row g-2 input-row">
+	                    <div class="col-sm" style="margin-top: 20px;">
+	                        <div class="form-floating mb-3">
+	                            <input name="title" type="text" class="form-control" id="title" placeholder="Kolkata is so hot now" required>
+	                            <label for="title" style="opacity:70%;">Article's Title</label>
+	                            <div class="invalid-feedback">
+	                                Enter a title for the article
+	                            </div>
+	                            <div class="valid-feedback">
+	                                Looks good!
+	                            </div>
+	                            <div id="characterCountError" class="error-message"></div>
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                <div class="row g-2 input-row">
+	                    <div class="col-sm" style="margin-top: 20px;">
+	                        <div class="form-floating mb-3">
+	                            <input name="tags" type="text" class="form-control" id="tags" placeholder="#heatwave#loo#global-warming" required>
+	                            <label for="tags" style="opacity:70%;">Tags (use # to separate)</label>
+	                            <div class="invalid-feedback">
+	                                Enter atleast one tag
+	                            </div>
+	                            <div class="valid-feedback">
+	                                Looks good!
+	                            </div>
+	                            <div id="emptyTag" class="error-message"></div>
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                <div class="row g-2 input-row">
+                            <div class="col">
+                                <label for="article-body" class="form-label" style="opacity:70%;">Article Body</label>
+                                <textarea name="article-body" class="form-control" id="article-body" rows="20" required></textarea>
+                                <div class="invalid-feedback">
+                                    Enter a body for your article
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                               	<div id="characterCountError1" class="error-message"></div>
+                               	<div id="wordCount" class="word-count">Word Count: 0</div>
+                            </div>
+                    </div>
+                        
+	                <div class="col-sm" style="padding: 20px 1px;">
+	                    <div class="form-floating mb-3 d-flex justify-content-center">
+	                        <button type="submit" class="btn log-btn form-submit" onclick="allcheck(event)">Post Article</button>
+	                    </div>
+	                </div>
+	                 
+	            </form>
+			</div>
+			</div>
+            <div id="footer"></div>    
+        </div>
+    </div>
+    
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+        
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+        
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+              form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                  event.preventDefault()
+                  event.stopPropagation()
+                }
+        
+                form.classList.add('was-validated')
+              }, false)
+            })
+        })()
+        
+        function allcheck(event) {
+			validateForm1(event);
+			validateForm2(event);
+			validateForm3(event);
+	
+			checkFile(event);
+		}
+
+
+        function validateForm1(event) {
+		    var titleInput = document.getElementById("title");
+		    var characterCountError = document.getElementById("characterCountError");
+
+		    if (titleInput.value.length > 100) {
+		        characterCountError.textContent = "Title must be less than 100 characters";
+		        characterCountError.style.display = "block";
+		        event.preventDefault();
+		    } else {
+		        characterCountError.textContent = "";
+		        characterCountError.style.display = "none";
+		    }
+		}
+        
+        function validateForm2(event) {
+            var articleBody = document.getElementById("article-body");
+            var words = articleBody.value.split(/\s+/).filter(function(word) {
+                return word.length > 0;
+            });
+            var characterCountError1 = document.getElementById("characterCountError1");
+            if (words.length > 1500) {
+                characterCountError1.textContent = "Body must be less than 1500 words";
+                characterCountError1.style.display = "block";
+                event.preventDefault();
+            } else if (words.length < 150 && words.length > 1) {
+                characterCountError1.textContent = "Body must be at least 150 words";
+                characterCountError1.style.display = "block";
+                event.preventDefault();
+            } else {
+                characterCountError1.textContent = "";
+                characterCountError1.style.display = "none";
+            }
+        }
+
+        
+        function checkFile(event) {
+            var fileInput = document.getElementById('photo');
+            var file = fileInput.files[0];
+            var allowedExtensions = ['jpeg', 'png', 'jpg'];
+            var fileExtension = file ? file.name.split('.').pop().toLowerCase() : null;
+            var maxSizeInBytes = 30 * 1024 * 1024; // 30MB
+            var isValid = true;
+
+            if (!file) {
+                alert('No file chosen. A default image will be selected.');
+            } else if (allowedExtensions.indexOf(fileExtension) === -1) {
+                alert('Please choose a JPEG, PNG, or JPG file.');
+                fileInput.value = '';
+                isValid = false;
+            } else if (file.size > maxSizeInBytes) {
+                alert('File size exceeds the allowed limit of 30MB.');
+                fileInput.value = '';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault(); 
+            }
+        }
+        
+        function updateWordCount() {
+            var articleBody = document.getElementById("article-body");
+            var wordCountElement = document.getElementById("wordCount");
+            var words = articleBody.value.trim().split(/\s+/).filter(function(word) {
+                return word.length > 0;
+            });
+            var wordCount = words.length;
+
+            wordCountElement.textContent = "Word Count: " + wordCount;
+        }
+
+        document.getElementById("article-body").addEventListener("input", updateWordCount);
+	
+        function validateForm3(event) {
+            var tagsInput = document.getElementById("tags");
+            var emptyTag = document.getElementById("emptyTag");
+
+            var tags = tagsInput.value.trim();
+
+            if (tags.length > 0 && !tags.startsWith("#")) {
+                emptyTag.textContent = "Tags must start with #";
+                emptyTag.style.display = "block";
+                event.preventDefault();
+            } else if (tags === "#"){
+            	emptyTag.textContent = "Tag input cannot be empty";
+                emptyTag.style.display = "block";
+                event.preventDefault();
+        	}else {
+                emptyTag.textContent = "";
+                emptyTag.style.display = "none";
+            }
+        }
+
+    </script>
+</body>
+</html>

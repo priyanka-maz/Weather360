@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>  
+    <meta charset="ISO-8859-1">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+			integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+			crossorigin="anonymous">
+	</script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="other/css/style1.css">
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js"></script>
+
+	<script>
+		$(document).on("scroll", function() {
+			var pageTop = $(document).scrollTop();
+			var pageBottom = pageTop + $(window).height();
+			var tags = $(".tag");
+		  
+			for (var i = 0; i < tags.length; i++) {
+			  var tag = tags[i];
+			  if ($(tag).position().top < pageBottom) {
+				$(tag).addClass("visible");
+			  } else {
+				$(tag).removeClass("visible");
+			  }
+			}
+		  });
+	</script>
+
+
+	<script src="https://kit.fontawesome.com/13deb536c6.js" crossorigin="anonymous"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Us</title>
+    <link rel="icon" href="Pics/icon.png">
+   
+    <script>
+		$(function () {
+			$("#header").load("header.jsp");
+			$("#footer").load("footer.html");
+		});
+	</script>
+
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <div class="font">
+		<div class="container-fluid">
+			<div id="header"></div>
+			   <div class="header-adjustment"></div>
+			 	<div class="container">
+		        <div class="row">
+		            <div class="col-md-6 left-section">
+		                <h1>About Us</h1>
+		                <p>In the summer of 2023, we started working on a web project using Java Servlet, JDBC, JSP...  
+		                What started out as an easy midsem project, is still a project, only it is not easy anymore. </p>
+		                <hr>
+		                <h1>Our Team</h1>
+		                <div class="team-member about">
+		                    <img src="Pics/team1.jpg" alt="Team Member 1">
+		                    <div style="font-size:25px;">Team 1 Name</div>
+		                    <p>Full Stack Developer</p>
+		                    <a href="mailto:team1@mail.com">
+		                    <i class="fa-sharp fa-regular fa-envelope"></i> Contact me!</a>
+		                </div>
+		                <div class="team-member about">
+		                    <img src="Pics/team1.jpg" alt="Team Member 2">
+		                    <div style="font-size:25px;">Team 2 Name</div>
+		                    <p>Full Stack Developer</p>
+		                    <a href="mailto:team2@mail.com">
+		                    <i class="fa-sharp fa-regular fa-envelope"></i> Contact me!</a>
+		                </div>
+		            </div>
+		            
+		            <div class="col-md-6 right-section">
+		                <div class="animated-text">
+							<div class="d-flex align-items-center">
+							  	<i class="fa-solid fa-flask fa-beat-fade" style="color:#0000FF; font-size: 60px; margin:10px;"></i>
+							    <h4>Research</h4>
+							 </div>
+							  <p>We use credible sources of information for weather research. 
+							  Our website gets live updates from all over the world.</p>
+						</div>
+					  
+		                
+		                <div class="animated-text">
+		                	<div class="d-flex align-items-center">
+			                    <i class="fa-solid fa-gear fa-spin" style="color:#0000FF; font-size: 60px; margin:10px;"></i>
+			                    <h4>APIs</h4>
+		                    </div>
+		                    <p>We wish to extend our heartfelt thanks to open-source weather resources such as 
+		                    <a href="https://openweathermap.org/">Open Weather Map</a> and <a href="https://wttr.in/">wttr</a> 
+		                    whose excellent APIs provided us with detailed JSON and HTML content that were used in this 
+		                    website. The informative ASCII art available at wttr, was of great help.</p>
+		                </div>
+		                
+		                <div class="animated-text">
+		                	<div class="d-flex align-items-center">
+			                    <i class="fa-brands fa-bootstrap fa-flip" style="color:#0000FF; font-size: 60px; margin:10px;"></i>
+			                    <h4>Frameworks</h4>
+		                    </div>
+		                    <p>The prominent frameworks used in this website are bootstrap, jQuery and fontawesome.</p>
+		                </div>
+            </div>
+            <p class="me">Last but not least, I wanna thank me.</p>
+            <audio id="music" src="Pics/snoop.mp3"></audio>
+            <div id="confetti-container">
+        		<canvas id="confetti-canvas"></canvas>
+    		</div>         
+        </div>
+    </div>
+	    <script>
+		 // Add animation to the text elements when the page loads
+		    $(document).ready(function() {
+		        var animatedTextElements = $('.animated-text');
+		        animatedTextElements.each(function(index) {
+		            $(this).addClass('slide-in-bottom');
+		            setTimeout(function() {
+		                $(this).addClass('slide-in');
+		            }.bind(this), index * 200); // Delay each animation by 200ms
+		        });
+		    });
+	
+		    var confettiSettings = {
+		            target: 'confetti-canvas',
+		            max: 120,  // Maximum number of confetti particles
+		            size: 3,   // Size of confetti particles
+		            animate: true
+		        };
+		    var confetti = new ConfettiGenerator(confettiSettings);
+	        var audioElement = document.getElementById('music');
+	        var lineElement = document.querySelector('.me');
+	        var isPlaying = false;
+	        
+	        lineElement.addEventListener('mouseenter', function() {
+	            confetti.render();
+	        });
+
+	        lineElement.addEventListener('mouseleave', function() {
+	            confetti.clear();
+	        });
+	        
+	        lineElement.addEventListener('click', function() {
+	            if (isPlaying) {
+	                audioElement.pause();
+	                isPlaying = false;
+	            } else {
+	                audioElement.play();
+	                isPlaying = true;
+	            }
+	        });
+	    </script>
+		</div>
+	</div>		
+<div id="footer"></div>
+</body>
+</html>
