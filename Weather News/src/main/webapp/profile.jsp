@@ -204,7 +204,7 @@
 	                var cityElement = document.getElementById('city');
 					var location = cityElement.textContent.trim();
 					
-	                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=36d2bb03bc2d84b4f43178f2e0b63fe8`;
+	                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=`;
 	
 	                // Fetch weather data from the API
 	                fetch(weatherUrl)
