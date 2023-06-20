@@ -5,7 +5,19 @@ while providing a focus on weather and climate information.
 
 It uses Azure Virtual Machine, Azure Text-To-Speech, Java Servlet, JDBC, Tomcat, MySQL, JSP.
 
-# Setup
+# Setup on Azure
+
+1. Create a Linux VM for running the application backend and storing the MySQL database.
+
+![Azure VM](screenshots/azure-vm.png)
+
+2. Create an API key for accessing the Azure Speech Services.
+
+![Azure Speech](screenshots/azure-speech.png)
+
+Note: API keys used for the deployment of the demo have been removed from this git repo for security reasons.
+
+# Setup Java Project
 
 * Clone the repo
    ```sh
@@ -30,7 +42,7 @@ It uses Azure Virtual Machine, Azure Text-To-Speech, Java Servlet, JDBC, Tomcat,
 
 3. Navigate to tomcat manager and upload and deploy WAR file.
 
-Navigate to /Startup to have the application automatically create the database and tables for you.
+Note: Navigate to /Startup to have the application automatically create the database and tables for you.
 
 ## Screenshots
 
