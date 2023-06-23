@@ -3,7 +3,8 @@
 This is a weather app which addresses the need for a fast and easy to manage article system,
 while providing a focus on weather and climate information.
 
-It uses Azure Virtual Machine, Azure Text-To-Speech, Java Servlet, JDBC, Tomcat, MySQL, JSP.
+- It uses the following Azure Services: **Azure Virtual Machine**, **Azure Text-To-Speech**.
+- The backend is coded using Java Servlet, Tomcat Server, JDBC db connection, MySQL database, JSP for frontend.
 
 # Setup on Azure
 
@@ -14,6 +15,40 @@ It uses Azure Virtual Machine, Azure Text-To-Speech, Java Servlet, JDBC, Tomcat,
 2. Create an API key for accessing the Azure Speech Services.
 
 ![Azure Speech](screenshots/azure-speech.png)
+
+Navigate to [article.jsp](https://github.com/priyanka-maz/Weather360/blob/4fda46c91d92217ffbfe3aaaadb6a9d3a1427b8c/Weather%20News/src/main/webapp/article.jsp#L81C8-L110C12) and paste in your Azure Speech Services Key in the following code block:
+```js
+        try {
+            fetch("https://eastus.tts.speech.microsoft.com/cognitiveservices/v1", {
+              method: "POST",
+              headers: {
+                "Ocp-Apim-Subscription-Key": "",
+                "Content-Type": "application/ssml+xml",
+                "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
+              },
+              body: `<speak version='1.0' xml:lang='en-US'>
+                     <voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyNeural'>
+                         ${textContent}
+                     </voice>
+                 </speak>`,
+            })
+              .then((response) => response.arrayBuffer())
+              .then((arrayBuffer) => {
+                var blob = new Blob([arrayBuffer], { type: 'audio/mp3' });
+                var url = URL.createObjectURL(blob);
+                var audio = new Audio();
+                audio.src = url;
+                audio.play();
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Oops! An error occurred.");
+              });
+          } catch (error) {
+            console.error("Error:", error);
+            alert("Oops! An error occurred.");
+          }
+```
 
 Note: API keys used for the deployment of the demo have been removed from this git repo for security reasons.
 
